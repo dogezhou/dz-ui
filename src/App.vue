@@ -1,15 +1,14 @@
 <template>
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Hello Vue 3.0 + Vite" />
+    <AutoComplete placeholder="input here" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AutoComplete from './components/AutoComplete.vue'
 
 export default {
     name: 'App',
     components: {
-        HelloWorld,
+        AutoComplete,
     },
 }
 </script>
