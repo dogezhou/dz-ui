@@ -3,10 +3,10 @@
         <TopNav />
         <div class="banner">
             <h1>dz UI</h1>
-            <h2>UI 框架</h2>
+            <h2>A UI framework written in Vue3 and TypeScript</h2>
             <div class="actions">
+                <router-link to="/doc">Get Start</router-link>
                 <a href="/">Github</a>
-                <a href=""></a>
             </div>
         </div>
     </div>
@@ -21,4 +21,22 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: lightpink;
+    padding: 60px 0;
+    > .actions {
+        padding: 14px 0;
+        a {
+            margin: 0 8px;
+            background: lightgray;
+            border-radius: 1000px;
+            padding: 4px 8px;
+        }
+    }
+}
+</style>
