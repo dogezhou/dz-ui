@@ -1,7 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import AutoComplete from './components/AutoComplete.vue'
-import './index.css'
+import Home from './views/Home.vue'
+import Doc from './views/Doc.vue'
+
+import './index.scss'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 const history = createWebHashHistory()
@@ -10,7 +12,11 @@ const router = createRouter({
     routes: [
         {
             path: '/',
-            component: AutoComplete,
+            component: Home,
+        },
+        {
+            path: '/doc',
+            component: Doc,
         },
     ],
 })
