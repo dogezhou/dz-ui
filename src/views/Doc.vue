@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="layout">
         <TopNav />
         <div class="content">
             <aside v-if="asideVisible">
@@ -34,23 +34,46 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-aside {
-    width: 140px;
-    padding: 10px 16px 16px;
-    background-color: aquamarine;
-    > h2 {
-        margin-bottom: 4px;
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    $asideWidth: 140px;
+    > .topNav {
+        flex-shrink: 0;
     }
-    > ol {
-        > li {
-            padding: 4px 0;
+    > .content {
+        display: flex;
+        flex-grow: 1;
+        padding-top: 55px;
+        > aside {
+            position: fixed;
+            height: 100%;
+            flex-shrink: 0;
+            width: $asideWidth;
+            padding: 10px 16px 16px;
+            background-color: aquamarine;
+            > h2 {
+                margin-bottom: 4px;
+            }
+            > ol {
+                > li {
+                    padding: 4px 0;
+                }
+            }
+            @media (max-width: 500px) {
+                position: fixed;
+                left: 0;
+                top: 55px;
+            }
         }
-    }
-    @media (max-width: 500px) {
-        position: fixed;
-        left: 0;
-        top: 0;
-        padding-top: 80px;
+        > main {
+            flex-grow: 1;
+            padding-left: $asideWidth;
+            @media (max-width: 500px) {
+                padding-left: 0;
+            }
+        }
     }
 }
 </style>

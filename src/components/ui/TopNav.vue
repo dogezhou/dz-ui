@@ -28,7 +28,8 @@ export default {
 
 <style lang="scss" scoped>
 .topNav {
-    position: relative;
+    position: fixed;
+    width: 100%;
     z-index: 10;
     display: flex;
     padding: 18px;
