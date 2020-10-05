@@ -1,6 +1,7 @@
 <template>
     <div class="topNav">
-        <div class="logo" @click="toggleAside">LOGO</div>
+        <div class="toggleAside" @click="toggleAside"></div>
+        <div class="logo">LOGO</div>
         <ul class="menu">
             <li>学习</li>
             <li>学习</li>
@@ -33,6 +34,17 @@ export default {
     padding: 18px;
     background-color: lightskyblue;
     align-items: center;
+    justify-content: center;
+    > .toggleAside {
+        display: none;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: red;
+    }
     > .logo {
         max-width: 8em;
         margin-right: auto;
@@ -42,6 +54,17 @@ export default {
         white-space: nowrap;
         > li {
             margin: 0 1em;
+        }
+    }
+    @media (max-width: 500px) {
+        > .toggleAside {
+            display: inline-block;
+        }
+        > .menu {
+            display: none;
+        }
+        > .logo {
+            margin: 0 auto;
         }
     }
 }
