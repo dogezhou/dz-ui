@@ -6,20 +6,13 @@
                 <h2>组件总览</h2>
                 <ol>
                     <li>
-                        <router-link to="/doc/button">Button</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/doc/button">Button</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/doc/button">Button</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/doc/button">Button</router-link>
+                        <router-link to="/doc/switch">Switch</router-link>
                     </li>
                 </ol>
             </aside>
-            <main>内容</main>
+            <main>
+                <router-view />
+            </main>
         </div>
     </div>
 </template>
