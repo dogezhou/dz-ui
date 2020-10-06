@@ -1,0 +1,67 @@
+<template>
+    <span :class="{ checked }" @click="toggle"></span>
+</template>
+
+<script lang="ts">
+import { ref } from 'vue'
+
+export default {
+    name: 'Switch',
+    setup() {
+        const checked = ref(false)
+        const toggle = () => {
+            checked.value = !checked.value
+        }
+        return {
+            checked,
+            toggle,
+        }
+    },
+}
+</script>
+
+<style lang="scss" scoped>
+$buttonWidth: 500px;
+$buttonHeight: 295px;
+$toggleDiameter: 255px; // 圆形直径
+$buttonToggleOffset: ($buttonHeight - $toggleDiameter) / 2;
+$toggleShadowOffset: 10px;
+$toggleWider: 333px;
+$colorGrey: #e9e9ea;
+$colorDarkGrey: #39393d;
+$colorGreen: #30d158;
+
+span {
+    position: relative;
+    display: inline-block;
+    width: $buttonWidth;
+    height: $buttonHeight;
+    background-color: $colorGrey;
+    border-radius: $buttonHeight / 2;
+    transition: 250ms all ease-in-out;
+    &::after {
+        content: '';
+        display: inline-block;
+        width: $toggleDiameter;
+        height: $toggleDiameter;
+        background-color: white;
+        border-radius: $toggleDiameter / 2;
+        position: absolute;
+        top: $buttonToggleOffset;
+        transform: translateX($buttonToggleOffset);
+        box-shadow: $toggleShadowOffset 0 $toggleShadowOffset * 4
+            rgba(black, 0.1);
+        transition: 250ms all ease-in-out;
+    }
+    &.checked {
+        background-color: $colorGreen;
+        &::after {
+            transform: translateX(
+                $buttonWidth - $toggleDiameter - $buttonToggleOffset
+            );
+            box-shadow: ($toggleShadowOffset * -1) 0 $toggleShadowOffset * 4
+                rgba(black, 0.1);
+        }
+    }
+}
+</style>

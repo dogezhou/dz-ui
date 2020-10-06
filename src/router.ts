@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from './views/Home.vue'
 import Doc from './views/Doc.vue'
 import DocDemo from './components/DocDemo.vue'
-import SwitchDemo from './components/SwitchDemo.vue'
+import SwitchDemo from './lib/switch/demo/SwitchDemo.vue'
 
 const history = createWebHashHistory()
 export const router = createRouter({
