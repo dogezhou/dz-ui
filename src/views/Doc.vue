@@ -69,9 +69,9 @@ export default {
         }
         > main {
             flex-grow: 1;
-            padding-left: $asideWidth;
+            padding: 12px 12px 12px $asideWidth + 12px;
             @media (max-width: 500px) {
-                padding-left: 0;
+                padding-left: 12px;
             }
         }
     }

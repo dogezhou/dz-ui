@@ -12,7 +12,7 @@ export default {
     },
     setup(props, context) {
         const toggle = () => {
-            context.emit('input', !props.value)
+            context.emit('update:value', !props.value)
         }
         return {
             toggle,
@@ -22,12 +22,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$buttonWidth: 500px;
-$buttonHeight: 295px;
-$toggleDiameter: 255px; // 圆形直径
+$buttonWidth: 44px;
+$buttonHeight: 22px;
+$toggleDiameter: 18px; // 圆形直径
 $buttonToggleOffset: ($buttonHeight - $toggleDiameter) / 2;
-$toggleShadowOffset: 10px;
-$toggleWider: 333px;
+$toggleShadowOffset: 2px;
+$toggleWider: 22px;
 $colorGrey: #e9e9ea;
 $colorDarkGrey: #39393d;
 $colorGreen: #30d158;
@@ -41,6 +41,9 @@ span {
     border-radius: $buttonHeight / 2;
     transition: 250ms all ease-in-out;
     cursor: pointer;
+    &:active::after {
+        width: $toggleWider;
+    }
     &::after {
         content: '';
         display: inline-block;
@@ -63,6 +66,11 @@ span {
             );
             box-shadow: ($toggleShadowOffset * -1) 0 $toggleShadowOffset * 4
                 rgba(black, 0.1);
+        }
+        &:active::after {
+            transform: translateX(
+                $buttonWidth - $toggleWider - $buttonToggleOffset
+            );
         }
     }
 }
