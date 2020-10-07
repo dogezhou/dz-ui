@@ -6,7 +6,10 @@
                 <h2>组件总览</h2>
                 <ol>
                     <li>
-                        <router-link to="/doc/switch">Switch</router-link>
+                        <router-link to="/doc/switch">Switch 开关</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/doc/button">Button 按钮</router-link>
                     </li>
                 </ol>
             </aside>
