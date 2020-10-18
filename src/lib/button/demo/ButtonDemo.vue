@@ -37,6 +37,12 @@
         <Button type="text"> normal 按钮</Button>
         <Button type="text" level="danger"> danger 按钮</Button>
     </div>
+    <h2>disabled prop</h2>
+    <Button disabled>按钮</Button>
+    <Button disabled type="link">按钮</Button>
+    <Button disabled type="text">按钮</Button>
+    <h2>loading prop</h2>
+    <Button loading>按钮</Button>
 </template>
 
 <script lang="ts">

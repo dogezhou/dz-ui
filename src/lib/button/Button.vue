@@ -1,5 +1,6 @@
 <template>
-    <button class="dz-button" :class="classes">
+    <button class="dz-button" :class="classes" :disabled="disabled">
+        <span v-if="loading" class="dz-loadingIndicator"></span>
         <slot />
     </button>
 </template>
@@ -22,6 +23,14 @@ export default {
             type: String,
             default: 'normal',
         },
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
+        loading: {
+            type: Boolean,
+            default: false,
+        },
     },
     setup(props) {
         const classes = computed(() => {
@@ -29,6 +38,7 @@ export default {
                 [`dz-type-${props.type}`]: props.type,
                 [`dz-size-${props.size}`]: props.size,
                 [`dz-level-${props.level}`]: props.level,
+                ['dz-loading']: props.loading,
             }
         })
         return { classes }
@@ -41,7 +51,6 @@ $buttonHeight: 32px;
 $borderColor: #d9d9d9;
 $color: #333;
 $borderRadius: 4px;
-$colorBlue: #177ddc;
 $colorRed: #d32029;
 $colorBlue: #40a9ff;
 $colorGrey: grey;
@@ -148,6 +157,42 @@ $colorGrey: grey;
                 color: darken($colorRed, 10%);
             }
         }
+    }
+    // disabled
+    &.dz-type-button {
+        &[disabled] {
+            cursor: not-allowed;
+            color: $colorGrey;
+            &:hover {
+                border-color: $colorGrey;
+            }
+        }
+    }
+    &.dz-type-link,
+    &.dz-type-text {
+        &[disabled] {
+            cursor: not-allowed;
+            color: $colorGrey;
+        }
+    }
+    @keyframes dz-spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    > .dz-loadingIndicator {
+        width: 14px;
+        height: 14px;
+        display: inline-block;
+        margin-right: 4px;
+        border-radius: 8px;
+        border-color: $colorBlue $colorBlue $colorBlue transparent;
+        border-style: solid;
+        border-width: 2px;
+        animation: dz-spin 1s infinite linear;
     }
 }
 </style>
