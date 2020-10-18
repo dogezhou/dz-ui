@@ -1,10 +1,12 @@
 <template>
-    <button class="dz-button" :class="`dz-type-${type}`">
+    <button class="dz-button" :class="classes">
         <slot />
     </button>
 </template>
 
 <script lang="ts">
+import { computed } from 'vue'
+
 export default {
     name: 'Button',
     props: {
@@ -12,6 +14,24 @@ export default {
             type: String,
             default: 'button',
         },
+        size: {
+            type: String,
+            default: 'normal',
+        },
+        level: {
+            type: String,
+            default: 'normal',
+        },
+    },
+    setup(props) {
+        const classes = computed(() => {
+            return {
+                [`dz-type-${props.type}`]: props.type,
+                [`dz-size-${props.size}`]: props.size,
+                [`dz-level-${props.level}`]: props.level,
+            }
+        })
+        return { classes }
     },
 }
 </script>
@@ -50,6 +70,84 @@ $colorGrey: grey;
     }
     & + & {
         margin-left: 8px;
+    }
+    // type
+    &.dz-type-link {
+        border-color: transparent;
+        box-shadow: none;
+        color: $colorBlue;
+        &:hover,
+        &:focus {
+            color: lighten($colorBlue, 10%);
+        }
+    }
+    &.dz-type-text {
+        border-color: transparent;
+        box-shadow: none;
+        color: inherit;
+        &:hover,
+        &:focus {
+            background: darken(white, 5%);
+        }
+    }
+    // size
+    &.dz-size-big {
+        font-size: 24px;
+        height: 48px;
+        padding: 0 16px;
+    }
+    &.dz-size-small {
+        font-size: 12px;
+        height: 20px;
+        padding: 0 4px;
+    }
+    // level
+    &.dz-type-button {
+        &.dz-level-primary {
+            background: $colorBlue;
+            color: white;
+            border-color: $colorBlue;
+            &:hover,
+            &:focus {
+                background: darken($colorBlue, 10%);
+                border-color: darken($colorBlue, 10%);
+            }
+        }
+        &.dz-level-danger {
+            background: $colorRed;
+            border-color: $colorRed;
+            color: white;
+            &:hover,
+            &:focus {
+                background: darken($colorRed, 10%);
+                border-color: darken($colorRed, 10%);
+            }
+        }
+    }
+    &.dz-type-link {
+        &.dz-level-danger {
+            color: $colorRed;
+            &:hover,
+            &:focus {
+                color: darken($colorRed, 10%);
+            }
+        }
+    }
+    &.dz-type-text {
+        &.dz-level-primary {
+            color: $colorBlue;
+            &:hover,
+            &:focus {
+                color: darken($colorBlue, 10%);
+            }
+        }
+        &.dz-level-danger {
+            color: $colorRed;
+            &:hover,
+            &:focus {
+                color: darken($colorRed, 10%);
+            }
+        }
     }
 }
 </style>
