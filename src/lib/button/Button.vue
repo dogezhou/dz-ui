@@ -56,6 +56,7 @@ $colorBlue: #40a9ff;
 $colorGrey: grey;
 
 .dz-button {
+    font-size: 14px;
     display: inline-flex;
     justify-content: center;
     align-items: center;

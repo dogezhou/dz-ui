@@ -1,5 +1,9 @@
 <template>
-    <span :class="{ checked: value }" @click="toggle"></span>
+    <span
+        class="dz-switch"
+        :class="{ ['dz-checked']: value }"
+        @click="toggle"
+    ></span>
 </template>
 
 <script lang="ts">
@@ -21,7 +25,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 $buttonWidth: 44px;
 $buttonHeight: 22px;
 $toggleDiameter: 18px; // 圆形直径
@@ -32,7 +36,7 @@ $colorGrey: #e9e9ea;
 $colorDarkGrey: #39393d;
 $colorGreen: #30d158;
 
-span {
+.dz-switch {
     position: relative;
     display: inline-block;
     width: $buttonWidth;
@@ -58,7 +62,7 @@ span {
             rgba(black, 0.1);
         transition: 250ms all ease-in-out;
     }
-    &.checked {
+    &.dz-checked {
         background-color: $colorGreen;
         &::after {
             transform: translateX(
