@@ -1,4 +1,4 @@
-# vue-autocomplete-demo
+# DZ UI library
 
 ## Project setup
 ```
