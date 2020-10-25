@@ -1,4 +1,5 @@
 <template>
+    <h1>dialog 示例</h1>
     <Dialog />
 </template>
 
