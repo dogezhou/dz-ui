@@ -4,10 +4,18 @@
     <Button @click="toggle">open dialog</Button>
     <Dialog
         v-model:visible="x"
+        title="警告"
         :close-on-click-overlay="false"
         :confirm="f1"
         :cancel="f2"
-    />
+    >
+        <template #title>
+            <div>title</div>
+        </template>
+        <template #content>
+            <div>wow</div>
+        </template>
+    </Dialog>
 </template>
 
 <script lang="ts">

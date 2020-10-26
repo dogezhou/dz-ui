@@ -4,10 +4,12 @@
         <div class="dz-dialog-wrapper">
             <div class="dz-dialog">
                 <header>
-                    标题
+                    <slot name="title" />
                     <span class="dz-dialog-close" @click="onClose"></span>
                 </header>
-                <main>内容</main>
+                <main>
+                    <slot name="content" />
+                </main>
                 <footer>
                     <Button @click="onConfirm">确定</Button>
                     <Button level="danger" @click="onCancel">取消</Button>
