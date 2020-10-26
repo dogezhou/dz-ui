@@ -1,21 +1,23 @@
 <template>
     <template v-if="visible">
-        <div class="dz-dialog-overlay" @click="onClickOverlay"></div>
-        <div class="dz-dialog-wrapper">
-            <div class="dz-dialog">
-                <header>
-                    <slot name="title" />
-                    <span class="dz-dialog-close" @click="onClose"></span>
-                </header>
-                <main>
-                    <slot name="content" />
-                </main>
-                <footer>
-                    <Button @click="onConfirm">确定</Button>
-                    <Button level="danger" @click="onCancel">取消</Button>
-                </footer>
+        <Teleport to="body">
+            <div class="dz-dialog-overlay" @click="onClickOverlay"></div>
+            <div class="dz-dialog-wrapper">
+                <div class="dz-dialog">
+                    <header>
+                        <slot name="title" />
+                        <span class="dz-dialog-close" @click="onClose"></span>
+                    </header>
+                    <main>
+                        <slot name="content" />
+                    </main>
+                    <footer>
+                        <Button @click="onConfirm">确定</Button>
+                        <Button level="danger" @click="onCancel">取消</Button>
+                    </footer>
+                </div>
             </div>
-        </div>
+        </Teleport>
     </template>
 </template>
 
