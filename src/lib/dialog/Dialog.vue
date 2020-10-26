@@ -1,18 +1,20 @@
 <template>
-    <div class="dz-dialog-overlay"></div>
-    <div class="dz-dialog-wrapper">
-        <div class="dz-dialog">
-            <header>
-                标题
-                <span class="dz-dialog-close" @click="close"></span>
-            </header>
-            <main>内容</main>
-            <footer>
-                <Button>确定</Button>
-                <Button level="danger">取消</Button>
-            </footer>
+    <template v-if="visible">
+        <div class="dz-dialog-overlay" @click="onClickOverlay"></div>
+        <div class="dz-dialog-wrapper">
+            <div class="dz-dialog">
+                <header>
+                    标题
+                    <span class="dz-dialog-close" @click="onClose"></span>
+                </header>
+                <main>内容</main>
+                <footer>
+                    <Button @click="onConfirm">确定</Button>
+                    <Button level="danger" @click="onCancel">取消</Button>
+                </footer>
+            </div>
         </div>
-    </div>
+    </template>
 </template>
 
 <script lang="ts">
@@ -21,6 +23,48 @@ export default {
     name: 'Dialog',
     components: {
         Button,
+    },
+    props: {
+        visible: {
+            type: Boolean,
+            default: false,
+        },
+        closeOnClickOverlay: {
+            type: Boolean,
+            default: true,
+        },
+        confirm: {
+            type: Function,
+        },
+        cancel: {
+            type: Function,
+        },
+    },
+    setup(props, context) {
+        const onClose = () => {
+            context.emit('update:visible', false)
+        }
+        const onClickOverlay = () => {
+            if (props.closeOnClickOverlay) {
+                onClose()
+            }
+        }
+        const onConfirm = () => {
+            if (props.confirm?.() !== false) {
+                onClose()
+            }
+        }
+        const onCancel = () => {
+            if (props.cancel?.() !== false) {
+                onClose()
+            }
+        }
+        return {
+            onClose,
+            onClickOverlay,
+            onConfirm,
+            onCancel,
+        }
     },
 }
 </script>
