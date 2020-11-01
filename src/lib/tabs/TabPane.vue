@@ -1,10 +1,20 @@
 <template>
-    <h1>tabspane</h1>
+    <slot />
 </template>
 
 <script lang="ts">
 export default {
     name: 'TabPane',
+    props: {
+        name: {
+            type: String,
+            required: true,
+        },
+        title: {
+            type: String,
+            required: true,
+        },
+    },
 }
 </script>
 
