@@ -61,20 +61,21 @@ export default {
         const indicator = ref<HTMLDivElement>(null)
         const container = ref<HTMLDivElement>(null)
         onMounted(() => {
-            watchEffect(() => {
-                // FIXME: not call first click
-                console.log('watchEffect')
-                const { width } = selectedTab.value.getBoundingClientRect()
-                indicator.value.style.width = width + 'px'
-                const {
-                    left: containerLeft,
-                } = container.value.getBoundingClientRect()
-                const {
-                    left: tabLeft,
-                } = selectedTab.value.getBoundingClientRect()
-                const indicatorLeft = tabLeft - containerLeft
-                indicator.value.style.left = indicatorLeft + 'px'
-            })
+            watchEffect(
+                () => {
+                    const { width } = selectedTab.value.getBoundingClientRect()
+                    indicator.value.style.width = width + 'px'
+                    const {
+                        left: containerLeft,
+                    } = container.value.getBoundingClientRect()
+                    const {
+                        left: tabLeft,
+                    } = selectedTab.value.getBoundingClientRect()
+                    const indicatorLeft = tabLeft - containerLeft
+                    indicator.value.style.left = indicatorLeft + 'px'
+                },
+                { flush: 'post' },
+            )
         })
 
         return {
