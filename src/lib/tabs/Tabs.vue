@@ -1,8 +1,15 @@
 <template>
     <div class="dz-tabs">
-        <div class="dz-tabs-nav">
+        <div ref="container" class="dz-tabs-nav">
             <div
                 v-for="(p, index) in tabPaneProps"
+                :ref="
+                    (el) => {
+                        if (p.name === selected) {
+                            selectedTab = el
+                        }
+                    }
+                "
                 :key="index"
                 class="dz-tabs-nav-item"
                 :class="{ selected: p.name === selected }"
@@ -10,6 +17,7 @@
             >
                 {{ p.title }}
             </div>
+            <div ref="indicator" class="dz-tabs-nav-indicator"></div>
         </div>
         <div class="dz-tabs-content">
             <!--  When using <component :is="vnode"> and passing vnode of the same type, you need to provide keys -->
@@ -19,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { computed } from 'vue'
+import { ref, computed, watchEffect, onMounted } from 'vue'
 import TabPane from './TabPane.vue'
 
 export default {
@@ -48,27 +56,49 @@ export default {
         const select = (title: string) => {
             context.emit('update:selected', title)
         }
+
+        const selectedTab = ref<HTMLDivElement>(null)
+        const indicator = ref<HTMLDivElement>(null)
+        const container = ref<HTMLDivElement>(null)
+        onMounted(() => {
+            watchEffect(() => {
+                // FIXME: not call first click
+                console.log('watchEffect')
+                const { width } = selectedTab.value.getBoundingClientRect()
+                indicator.value.style.width = width + 'px'
+                const {
+                    left: containerLeft,
+                } = container.value.getBoundingClientRect()
+                const {
+                    left: tabLeft,
+                } = selectedTab.value.getBoundingClientRect()
+                const indicatorLeft = tabLeft - containerLeft
+                indicator.value.style.left = indicatorLeft + 'px'
+            })
+        })
+
         return {
             defaults,
             tabPaneProps,
             currentTab,
             select,
+            selectedTab,
+            indicator,
+            container,
         }
     },
 }
 </script>
 
 <style lang="scss" scoped>
-$colorBlue: #40a9ff;
-$color: #333;
-$borderColor: #d9d9d9;
+@import '../styles/variables';
 
 .dz-tabs {
     &-nav {
         display: flex;
-        color: $color;
-        border-bottom: 1px solid $borderColor;
         position: relative;
+        color: $fontColor;
+        border-bottom: 1px solid $borderColor;
         &-item {
             padding: 8px 0;
             margin: 0 16px;
@@ -77,8 +107,17 @@ $borderColor: #d9d9d9;
                 margin-left: 0;
             }
             &.selected {
-                color: $colorBlue;
+                color: map-get($colors, primary);
             }
+        }
+        &-indicator {
+            position: absolute;
+            height: 3px;
+            background: map-get($colors, primary);
+            left: 0;
+            bottom: -1px;
+            width: 100px;
+            transition: all 250ms;
         }
     }
     &-content {
