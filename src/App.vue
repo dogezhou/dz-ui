@@ -20,3 +20,20 @@ export default {
     },
 }
 </script>
+
+<style lang="scss">
+@import './styles/variables';
+
+#app {
+    height: 100vh;
+    background: rgb(240, 252, 255);
+    background: linear-gradient(
+        90deg,
+        rgba(240, 252, 255, 1) 0%,
+        rgba(247, 250, 252, 1) 35%,
+        rgba(255, 248, 249, 1) 100%
+    );
+    font-family: 'Noto Serif SC', serif;
+    color: $fontColor;
+}
+</style>
